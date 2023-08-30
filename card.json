@@ -1,0 +1,20 @@
+[{
+    "id":"Col1",
+    "Title": "Por hacer",
+    "cards":[{
+        "Title":"Hola",
+        "Description":"Soy una tarjeta",
+        "id":"card1"
+    }
+    ]
+
+    
+},
+{
+    "id":"Col2",
+    "Title": "En proceso"
+},
+{
+    "id":"Col3",
+    "Title": "Hecho"
+}]

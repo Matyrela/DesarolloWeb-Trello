@@ -4,31 +4,64 @@
 }
 
 body{
-    background-image: url(https://i.pinimg.com/originals/c1/03/c3/c103c3f9fea21504d7c0b025086a8269.jpg);
+    /*background-image: url(https://i.pinimg.com/originals/c1/03/c3/c103c3f9fea21504d7c0b025086a8269.jpg);*/
+    background-image: url(https://cdn1.epicgames.com/ue/product/Screenshot/1-1920x1080-a58e6c53fee218623cb26ba39786d1e5.jpg?resize=1&w=1920);
+    background-repeat: repeat-y;
+    background-size: auto;
+}
+
+.alignRight{
+    margin-left: auto;
+    margin-right: 0;
 }
   
 
 .flex-row {
     display: flex;
     flex-wrap: nowrap;
-  }
+}
+
+.card-title{
+    max-width: 85%;
+}
 
 .PageTittle{
     font-size: auto;
     color: white;
 }
 
+.card-text{ 
+    width: 100%;
+    overflow-wrap: break-word;  
+    word-wrap: break-word; 
+    word-break: break-word;
+    white-space: normal;
+    
+}
+
 .card{
     margin-top: 10px;
     margin-bottom: 10px;
+    animation-name: cardAnimations;
+    animation-duration: 1s;
+}
+
+.card:hover{
+    background-color: rgb(211, 211, 211);
+}
+
+.btnp{
+    --bs-btn-padding-x: 0.55rem !important;
+    --bs-btn-padding-y: 0.375rem !important;
+    font-size: 0.65rem;
 }
 
 .header{
-    background-color: rgb(64, 83, 26);
+    background-color: rgba(0, 0, 0, 0.8);
     height: 5vh;
-    box-shadow: 0px 7px 5px 0px rgba(0,0,0,0.75);
-    -webkit-box-shadow: 0px 7px 5px 0px rgba(0,0,0,0.75);
-    -moz-box-shadow: 0px 7px 5px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 7px 5px 0px rgba(0,0,0,0.8);
+    -webkit-box-shadow: 0px 7px 5px 0px rgba(0,0,0,0.8);
+    -moz-box-shadow: 0px 7px 5px 0px rgba(0,0,0,0.8);
 }
 
 :root {
@@ -36,33 +69,37 @@ body{
     --card-count : 3px;
 }
 
-.cardContainer{
+.listContainer{
     margin-top: 5vh;
     padding-bottom: 1vh;
     width: 100%;
     overflow: auto;
     white-space: nowrap;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
+    
 }
 
 .colu {
     background-color: rgba(25, 35, 45, 0.8);
-    margin-left: 20px;
-    margin-right: 20px;
-    min-height: 500px;
-    width: 350px !important;
-    max-width: 350px !important;
-    min-width: 350px !important;
+    margin-left: 10px;
+    margin-right: 10px;
+    min-height: 80vh;
+    width: 350px;
+    max-width: 350px;
+    min-width: 350px;
     border-radius: 6px;
     padding: 10px;
 }
 
 .ColTitle {
-    color: rgb(255, 255, 255);
+    color: rgb(225, 235, 245);
     font-weight: bold;
     text-align: center;
     padding-top: 5px; 
+    font-size: 2rem;
+    max-width: 15rem;
+    word-wrap: nowrap;
 }
 
 hr.whitehr{
@@ -74,11 +111,18 @@ hr.whitehr{
     margin-bottom: 7px;
     display: flex;
     align-items: center;
+    white-space: normal;
 }
+
+.btnRemove{
+    align-items: baseline;
+}
+
 
 .inputCard{
     width: 100%;
 }
+
 
 ::-webkit-scrollbar{
     height: 4px;
@@ -88,4 +132,25 @@ hr.whitehr{
 ::-webkit-scrollbar-thumb:horizontal{
     background: #333333a4;
     border-radius: 10px;
+}
+
+#emptyCol{
+    min-height: 0px;
+    height:75px;    
+}
+
+@keyframes cardAnimations {
+    from {
+        background-color: rgba(255, 255, 255, 0);
+    }
+    to {
+        background-color: white;
+    }
+
+  }
+
+
+.cardContainer{
+    width: 100%;
+    min-height: 70vh;
 }

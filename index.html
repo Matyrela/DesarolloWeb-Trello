@@ -4,124 +4,144 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-    <title>Trollo</title>
+    <title>Trello</title>
 
     <link rel="stylesheet" href="style.css">
-
     <script src="script.js"></script>
 
 
 </head>
-<body class="bg">
+<body class="bg" onload="setMax('undefined');">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 
     <div class="header">
-      <h1 class="PageTittle">&nbsp;Trollo</h1>
+      <h1 contenteditable="true" class="PageTittle" spellcheck="false">&nbsp;Trello</h1>
     </div>
 
-    <div id= "cardContainer" class="cardContainer">
-          <div id="col1" class="colu">
+    <div id= "listContainer" class="listContainer">
+          <div id="Col1" class="colu" draggable="true" ondragstart="drag(event)">
             <div class="ColTitleContainer">
-              <h2 class="ColTitle">Por Hacer</h2>
-              <button style="margin-left: auto;" type="button" class="btn btn-success" onclick="buttonPressed(this)">
-                <b>+</b>
-              </button>
+              <h2 class="ColTitle" contentEditable="true" spellcheck="false">Por Hacer</h2>
+              <div class="alignRight">
+                <button style="margin-left: auto;" type="button" class="btn btn-success" onclick="buttonPressed(this)">
+                  <b>+</b>
+                </button>
+                <button style="margin-left: auto;" type="button" class="btn btn-danger" onclick="deleteCardSolicitation(this)">
+                  <b>-</b>
+                </button>
+              </div>
             </div>
             <hr class="whitehr">
+            <div class="cardContainer" id="cardContainer" ondrop="drop(event)" ondragover="allowDrop(event)">
+              
+            </div>
 
           </div>
 
-          <div id="col2" class="colu">
+          <div id="Col2" class="colu" draggable="true" ondragstart="drag(event)">
             <div class="ColTitleContainer">
-              <h2 class="ColTitle"> En proceso</h2>
-              <button style="margin-left: auto;" type="button" class="btn btn-success" onclick="buttonPressed(this)">
-                <b>+</b>
-              </button>
-            </div>
+              <h2 class="ColTitle" contentEditable="true" spellcheck="false"> En proceso</h2>
+              <div class="alignRight">
+                <button style="margin-left: auto;" type="button" class="btn btn-success" onclick="buttonPressed(this)">
+                  <b>+</b>
+                </button>
+                <button style="margin-left: auto;" type="button" class="btn btn-danger" onclick="deleteCardSolicitation(this)">
+                  <b>-</b>
+                </button>
+              </div>
+            </div>  
             <hr class="whitehr">
+            <div class="cardContainer" id="cardContainer" ondrop="drop(event)" ondragover="allowDrop(event)">
+
+            </div>
             
           </div>
           
-          <div id="col3" class="colu">
+          <div id="Col3" class="colu" draggable="true" ondragstart="drag(event)">
             <div class="ColTitleContainer">
-              <h2 class="ColTitle">Hecho</h2>
-              <button style="margin-left: auto;" type="button" class="btn btn-success" onclick="buttonPressed(this)">
-                <b>+</b>
-              </button>
-            </div>
-            <hr class="whitehr">
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">Soy un ejemplo!</h5>
-                <hr>
-                <p class="card-text">Dont look the caption, look at me</p>
+              <h2 class="ColTitle" contentEditable="true" spellcheck="false">Hecho</h2>
+              <div class="alignRight">
+                <button style="margin-left: auto;" type="button" class="btn btn-success" onclick="buttonPressed(this)">
+                  <b>+</b>
+                </button>
+                <button style="margin-left: auto;" type="button" class="btn btn-danger" onclick="deleteCardSolicitation(this)">
+                  <b>-</b>
+                </button>
               </div>
             </div>
-          </div>
-
-          <div id="col4" class="colu">
-            <div class="ColTitleContainer">   
-              <h2 class="ColTitle">Leon tonto</h2>
-              <button style="margin-left: auto;" type="button" class="btn btn-success" onclick="buttonPressed(this)">
-                <b>+</b>
-              </button>
-            </div>
             <hr class="whitehr">
-          </div>
+            <div class="cardContainer" id="cardContainer" ondrop="drop(event)" ondragover="allowDrop(event)">
 
-          <div id="col5" class="colu">
-            <div class="ColTitleContainer">   
-              <h2 class="ColTitle">Amongus</h2>
-              <button style="margin-left: auto;" type="button" class="btn btn-success" onclick="buttonPressed(this)">
-                <b>+</b>
-              </button>
             </div>
-            <hr class="whitehr">
-
-        </div>
-
-        <div id="col6" class="colu">
-          <div class="ColTitleContainer">   
-            <h2 class="ColTitle">Amongus</h2>
-            <button style="margin-left: auto;" type="button" class="btn btn-success" onclick="buttonPressed(this)">
-              <b>+</b>
-            </button>
           </div>
-          <hr class="whitehr">
+
           
-      </div>
+          <div id="emptyCol" class="colu" draggable="true" ondragstart="drag(event)"> 
+            <div class="ColTitleContainer">
+              <h2 class="ColTitle"> Agregar lista</h2>
+              <button style="margin-left: auto;" type="button" class="btn btn-success" onclick="addList(this)">
+                <b>+</b>
+              </button>
+            </div>
+          </div>
+            
     </div>
 
-    <!-- Modal -->
+    <!-- Modal Creation Card -->
     <div class="modal fade" id="addTask" tabindex="-1" aria-labelledby="addTaskLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
-          <div class="modal-header">
+          <div class="modal-header"> 
             <h1 class="modal-title fs-5" id="addTaskLabel">Agregar tarea</h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-          <div class="modal-body">
-            <div class="input-group mb-3">
-              <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon1">Titulo</span>
+          <form action="javascript:void(0);">
+            <div class="modal-body">
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1">Titulo</span>
+                </div>
+                <input id="titleInput" class="inputCard form-control " type="text" aria-label="Username" aria-describedby="basic-addon1">
               </div>
-              <input id="titleInput" class="inputCard form-control " type="text" aria-label="Username" aria-describedby="basic-addon1">
-            </div>
-            <div class="input-group mb-3">
-              <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon1">Descripción</span>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1">Descripción</span>
+                </div>
+                <input id="descriptionInput" class="inputCard form-control " type="text" aria-label="Descripción" aria-describedby="basic-addon1">
               </div>
-              <input id="descriptionInput" class="inputCard form-control " type="text" 
-              aria-label="Descripción" aria-describedby="basic-addon1">
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1">Fecha de Vencimiento</span>
+                </div>
+                <input id="expirationInput" class="inputCard form-control " type="date" aria-label="FechaVencimiento" aria-describedby="basic-addon1">
+              </div>
             </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" >Cerrar</button>
-            <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="cardSolicitation(this);">Guardar</button>
-          </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" >Cerrar</button>
+              <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" onclick="cardSolicitation(this);">Guardar</button>
+            </div>
+          </form>
         </div>
       </div>
     </div>
-
+    
+    <!-- Modal Delete Element -->
+    <div class="modal fade" id="deleteElement" tabindex="-1" aria-labelledby="deleteElementLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Borrar Elemento</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            ¿Estás seguro/a de que quieres borrar este Elemento?
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+            <button type="sumbit" class="btn btn-primary" data-bs-dismiss="modal" onclick="deleteElement()">Borrar</button>
+          </div>
+        </div>
+      </div>
+    </div>   
 </body>
 </html>
