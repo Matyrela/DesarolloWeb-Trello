@@ -6,6 +6,8 @@ var ultimoBotonPresionadoCol;
 var cardCont = 0;
 let colContainer = new Array();
 
+// URL de la API
+const apiUrl = 'http://127.0.0.1:8091';
 
 function setMaxToNew(element) {
   settings = {
@@ -165,7 +167,7 @@ function addCard(button, title, description, expirationDate) {
   cardCont++;
   let parent = button.parentNode.parentNode.parentNode.getElementsByClassName("cardContainer")[0];
   let expirationColor = colorOnDate(expirationDate);
-  
+
   parent.innerHTML = parent.innerHTML +
     `<div class="card" draggable="true" ondragstart="drag(event)" id="card${cardCont}">
   <div class="card-body">
@@ -190,7 +192,7 @@ function addCard(button, title, description, expirationDate) {
   document.getElementById("titleInput").value = "";
   document.getElementById("descriptionInput").value = "";
   document.getElementById("expirationInput").value = "";
-  addCardJson(button.parentNode.parentNode.id,`card${cardCont}`, description, expirationDate, title);
+  addCardJson(button.parentNode.parentNode.id, `card${cardCont}`, description, expirationDate, title);
 }
 
 function colorOnDate(expirationDate) {
@@ -222,7 +224,7 @@ function addList(button) {
   newCol.id = `Col${cont}`;
   newCol.classList.add('colu');
   newCol.setAttribute("draggable", "true");
-  newCol.setAttribute("ondragstart","drag(event)");
+  newCol.setAttribute("ondragstart", "drag(event)");
   newCol.innerHTML = `<div class="ColTitleContainer">
     <h2 class="ColTitle" contentEditable="true">Nueva columna</h2>
     <div class="alignRight">
@@ -254,30 +256,51 @@ function drag(ev) {
 function drop(ev) {
   ev.preventDefault();
   let data = ev.dataTransfer.getData("card");
-  if(data.toString().includes("Col")){
+  if (data.toString().includes("Col")) {
     ev.target.parentNode.parentNode.prepend(document.getElementById(data));
-  }else{
+  } else {
     ev.target.appendChild(document.getElementById(data));
   }
 }
 
 
-function addCol(iden){
-  let col = {id: iden, title: "Nueva columna", cards: new Array()};
+function addCol(iden) {
+  let col = { id: iden, title: "Nueva columna", cards: new Array() };
   colContainer.push(col);
+
+  const jsonData = col;
+
+  const requestOptions = {
+    method: 'POST',
+    body: jsonData,
+  };
+
+  fetch(apiUrl+"/col", requestOptions)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Error en la solicitud');
+      }
+      return response.json();
+    })
+    .then(data => {
+      console.log(data);
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
 }
 
-function addCardJson(idCol, idCard, description, date, title){
+function addCardJson(idCol, idCard, description, date, title) {
   colContainer.forEach(function (element) {
     if (element.id == idCol) {
-      element.cards.push({id: idCard, description: description, expirationDate: date, title: title});
+      element.cards.push({ id: idCard, description: description, expirationDate: date, title: title });
     }
   })
 
   console.log(idCol);
 }
 
-function removeCol(idCol){
+function removeCol(idCol) {
   colContainer.forEach(function (element) {
     let col;
     if (element.id == idCol) {
@@ -287,7 +310,7 @@ function removeCol(idCol){
   })
 }
 
-function removeCard(idCol, idCard){
+function removeCard(idCol, idCard) {
   let col;
   let card;
   colContainer.forEach(function (element) {
@@ -315,7 +338,7 @@ function drawColumns() {
     newCol.id = element.id;
     newCol.classList.add('colu');
     newCol.setAttribute("draggable", "true");
-    newCol.setAttribute("ondragstart","drag(event)");
+    newCol.setAttribute("ondragstart", "drag(event)");
     newCol.innerHTML = `<div class="ColTitleContainer">
       <h2 class="ColTitle" contentEditable="true">${element.title}</h2>
       <div class="alignRight">
@@ -334,7 +357,7 @@ function drawColumns() {
     listContainer.insertBefore(newCol, listContainer.children[listContainer.children.length - 1]);
     setMaxToNew(newCol.children[0].children[0]);
     addCol(newCol.id);
-    element.cards.forEach(function (ele){
+    element.cards.forEach(function (ele) {
       cardCont++;
       let parent = newCol;
       parent.innerHTML = parent.innerHTML +
@@ -362,11 +385,12 @@ function drawColumns() {
       document.getElementById("descriptionInput").value = "";
       document.getElementById("expirationInput").value = "";
     }
-    )})
+    )
+  })
 
-  }
-  function myFunction(el){
-    let expirationDate = el.value;
-    el.style.backgroundColor = colorOnDate(expirationDate);
-    console.log(el.style);
-  }
+}
+function myFunction(el) {
+  let expirationDate = el.value;
+  el.style.backgroundColor = colorOnDate(expirationDate);
+  console.log(el.style);
+}
